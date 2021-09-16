@@ -3,3 +3,6 @@
 *.npy
 __pycache__
 *.xml
+
+*.h5
+*.txt

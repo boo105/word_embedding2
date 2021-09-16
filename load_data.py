@@ -25,7 +25,7 @@ def process_data() :
     for string in sent_text:
         tokens = re.sub(r"[^a-z0-9]+", " ", string.lower())
         normalized_text.append(tokens)
-
+    
     # 각 문장에 대해서 NLTK를 이용하여 단어 토큰화를 수행.
     result = [word_tokenize(sentence) for sentence in normalized_text]
 
