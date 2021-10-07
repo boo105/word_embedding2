@@ -3,6 +3,11 @@ import urllib.request
 import pandas as pd
 from pprint import pprint 
 
+"""
+BPE의 변형 알고리즘인 Wordpiece Model 사용 -> 코퍼스의 우도(가능도(확률?)) 이 높은 쌍을 병합시킴 , _ 문장 복원을 함.
+학습을 시키는게 아닌 단순한 사전을 이용하는것임.
+"""
+
 urllib.request.urlretrieve("https://raw.githubusercontent.com/LawrenceDuan/IMDb-Review-Analysis/master/IMDb_Reviews.csv", filename="IMDb_Reviews.csv")
 train_df = pd.read_csv('IMDb_Reviews.csv')
 
@@ -34,7 +39,8 @@ for ts in tokenized_string:
   print ('{} ----> {}'.format(ts, tokenizer.decode([ts])))
 
 
-# 앞서 실습한 문장에 even 뒤에 임의로 xyz 추가
+# 앞서 실습한 문장에 even 뒤에 임의로 xyz 추가\
+# OOV 문제 발생!!
 sample_string = "It's mind-blowing to me that this film was evenxyz made."
 
 # 인코딩한 결과를 tokenized_string에 저장

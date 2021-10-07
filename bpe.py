@@ -1,5 +1,13 @@
 import re, collections
-from IPython.display import display, Markdown, Latex
+
+"""
+1994년에 제안된 알고리즘
+
+OOV 문제를 완화 시키기 위해(희귀 단어 , 신조어)
+서브워드 분리 알고리즘을 사용함.
+
+BPE는 서브워드 분리 알고리즘 중 하나임.
+"""
 
 # BPE 수행할 횟수
 num_merges = 10
@@ -51,8 +59,14 @@ for i in range(num_merges):
     print("dictionary: {}".format(dictionary))
 
 
+print()
+print("==== 단어 집합 사전 ====")
 print(bpe_codes)
+print("\n")
 
+"""
+단어 집합에 없는 단어를 대처하는 방법
+"""
 
 def get_pairs(word):
     """Return set of symbol pairs in a word.
@@ -91,6 +105,8 @@ def encode(orig):
         new_word = []
         i = 0
         while i < len(word):
+
+            # bigram의 first 단어를 찾아 new_word에 추가해줌
             try:
                 j = word.index(first, i)
                 new_word.extend(word[i:j])
@@ -98,7 +114,8 @@ def encode(orig):
             except:
                 new_word.extend(word[i:])
                 break
-
+            
+            # bigram은 당연히 연속쌍이기 떄문에 i+1이 second인지 확인함
             if word[i] == first and i < len(word)-1 and word[i+1] == second:
                 new_word.append(first+second)
                 i += 2
